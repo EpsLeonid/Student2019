@@ -11,4 +11,6 @@ m=16;
 y=v_exp(t1,t2,A,t);
 s=v_filter(y,k,l,m);
 %% Построение графиков
-plot(t,y,'r',t,s,'g');
+plot(t,y,'r');
+figure;
+plot(t,s,'g');
