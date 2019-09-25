@@ -1,24 +1,29 @@
-function S = filtrFun(k,l,M,Y,tMin,tMax,dt)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function S = filtrFun(k,l,M,v,tMin,tMax,dt)
+%Òğåóãîëüíûé ôèëüòğ 
+%d(n)=v(n)-v(n-k)-v(n-l)+v(n-k-l),
+%p(n)=p(n-1)+d(n),
+%r(n)=p(n)+M*d(n),
+%s(n)=s(n-1)+r(n),
+%
     for i=1:dt:tMax-tMin+1
         if(i>l)
-            yl=Y(i-l);
+            vl=v(i-l);%vl - v(n-l)
         else
-            yl=0;
+            vl=0;
         end
         
         if(i>k)
-            yk=Y(i-k);
+            vk=v(i-k);%vk - v(n-k)
         else
-            yk=0;
+            vk=0;
         end
+        
         if(i>k+l)
-            ykl=Y(i-k);
+            vkl=v(i-k-l);%vkl - v(n-k-l)
         else
-            ykl=0;
+            vkl=0;
         end
-        d(i)=Y(i)-yl-yk-ykl;
+        d(i)=v(i)-vl-vk+vkl;
         
         if(i>1)
             pl=p(i-1);
