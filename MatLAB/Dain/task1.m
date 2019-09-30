@@ -9,11 +9,11 @@ function [y]=task1 (tau1,tau2,A,t)
 k=length(t);
 % вектор y(k)
 y=1:k;
-for n=1:k
-if t(n)<0
-y(n)=0;
+for i=1:k
+if t(i)<0
+y(i)=0;
 else 
-y(n)=A*(exp(-t(n)/tau1)-exp(-t(n)/tau2));  
+y(i)=A*(exp(-t(i)/tau1)-exp(-t(i)/tau2));  
 end
 end
 end
