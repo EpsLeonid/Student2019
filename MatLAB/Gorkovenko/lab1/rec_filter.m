@@ -1,7 +1,7 @@
 function [s] = rec_filter(v,k,l,M)
-
-n = length(v); %количество элементов
-d = zeros(1,n); %
+%создание необходимых массивов
+n = length(v);
+d = zeros(1,n); 
 p = zeros(1,n);
 r = zeros(1,n);
 s = zeros(1,n);
