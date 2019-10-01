@@ -1,5 +1,5 @@
 function outArray = m_filter(l, k, m1, m2, y)
-%функция фильтра
+%функция usp-like фильтра
     [dk, dl, p, q, s] = deal(zeros(1, length(y))); %определение параметров фильтра
     for n = 1:length(y) %заполнение массивов для первых двух параметров
         dk(n) = y(n);
@@ -11,7 +11,7 @@ function outArray = m_filter(l, k, m1, m2, y)
             dl(n) = y(n) - y(n - 1);
         end
         if(n - 1 - l > 0)
-            dl(n) = y(n - l) - y(n - l - 1);
+            dl(n) = y(n - l) - y(n - l - 1);%в уравнение для расчёта параметра p dl входит с аргументом n - lS
         end
     end
     
