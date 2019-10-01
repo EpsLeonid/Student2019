@@ -1,6 +1,6 @@
 %Создание функции, согласно заданию №1, пункту 1
 
-function [y]= first_one (t1, t2, t)
+function [y] = first_one (t1, t2, t)
 
 count = length(t); %Определяем длину массива t
 y = 1:count; %Создаём массив y
