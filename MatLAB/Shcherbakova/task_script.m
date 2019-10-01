@@ -5,11 +5,21 @@ A = 1;
 t_i = 1;
 t0 = -10;
 t_max = 100;
+k=5; 
+l=5; 
+M=15;
 %% функция
 [y,t] = task(A, t1, t2, t_i, t0, t_max);
+[s] = taskfunc( k, l, M, y);
 %% Построение графика
 plot(t,y);
 grid on;
 xlim ([-10,100]);
-xlable('t');
-ylable('y(t)');
+% xlable('t');
+% ylable('y(t)');
+%% Построение графика2
+d=task(A, t1, t2, t_i, t0, t_max); % формируем данные для фильтра
+figure;
+plot(t,s); % построение графика фильтра 
+grid on;
+xlim([t_min,t_max]);  % ограничение отрисовки графика по оси Х
