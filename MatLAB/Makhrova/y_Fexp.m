@@ -1,10 +1,14 @@
-function y = Fexp(tau1, tau2, A, t) %задаём функцию 
-    k = length(t); %длинна масса 
-    for n = 1:k
-    if(t(n) < 0)
-    y(n) = 0;
-        else
-            y(n) = A * (exp(-t(n)/tau1) - exp(-t(n)/tau2));
-        end
-    end
-        
+tau1 = 16; %задаём переменные 
+tau2 = 5;
+A = 1;
+t = -10:1:100; %временной итервал 
+
+l = 6; %параметры фильтра
+k = 13;
+m1 = 15;
+m2 = 1;
+
+y = Fexp(tau1, tau2, A, t); %задаем функцию
+m = filter(l, k, m1, m2);
+
+plot(t,y,'g',t,m,'b');%строим график 
