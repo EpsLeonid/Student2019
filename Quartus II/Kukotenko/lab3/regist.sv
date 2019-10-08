@@ -15,7 +15,7 @@ reg [7:0] regA;
 reg [7:0] regB;
 reg [7:0] regC1;//дл€ задержки
 
-always @( posedge clock ) //всегда когда приходит передний фронт clock выполн€етс€ эта операци€
+always @( posedge clock ) //всегда, когда приходит передний фронт clock выполн€етс€ эта операци€
 begin
 	regA<=A;
 	regB<=B;
