@@ -1,3 +1,4 @@
+import Zadanie2_parameter::R;
 module Zadanie2 (a,b,c,d,clk,out,A,B,C,DATA_OUT,DATA_MULT,DATA_SUMM);
  
 // C=A*B
@@ -15,12 +16,12 @@ assign c=a*b;
  end
  
 // register (8)
-  input wire [7:0] A;
-  input wire [7:0] B;
-  input wire [7:0] C;
- output reg [7:0] DATA_OUT;
- output reg [7:0] DATA_MULT;
- output reg [7:0] DATA_SUMM; 
+  input wire [R-1:0] A;
+  input wire [R-1:0] B;
+  input wire [R-1:0] C;
+ output reg [2*R-1:0] DATA_OUT;
+ output reg [R-1:0] DATA_MULT;
+ output reg [R-1:0] DATA_SUMM; 
 always @(posedge clk) begin
 DATA_MULT<=A*B;
 DATA_SUMM<=C;
@@ -28,5 +29,3 @@ DATA_OUT<=DATA_MULT+DATA_SUMM;
 end
 
 endmodule
-
-
