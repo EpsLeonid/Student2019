@@ -20,12 +20,19 @@ module V1_task2
 //--output task 2.3
 	output reg out,
 //--output task 2.4
-	output reg [(2*Const)-1:0] DATA_OUT);
+	output reg [2*Const-1:0] DATA_OUT);
 	
 //------------------------------
-reg [(2*Const)-1:0] DATA_MULT;
-reg [(2*Const)-1:0] DATA_DELAY;
-	
+
+reg [Const-1:0] reg_A;//
+reg [Const-1:0] reg_B;// the registers records
+reg [Const-1:0] reg_C;//
+
+reg [2*Const-1:0] DATA_MULT;//the multiplication register
+reg [Const-1:0] DATA_DELAY;// the addition register
+reg [2*Const-1:0] reg_DATA_OUT;// the final register
+
+
 // task 2.2
 	assign c=a * b;
 // task 2.3
@@ -36,20 +43,27 @@ begin
 	else
 	out<=d;
 end
+
 //task 2.4
-always @(posedge reset or posedge clk)
+
+//the entry in the registers
+always_ff @(posedge clk)
 begin
-	if (reset)
-	 begin
-	 DATA_MULT<=0;
-	 DATA_DELAY<=0;
-	 DATA_OUT<=0;
-	 end
-	else
-	 begin
-	 DATA_MULT<= A*B;
-	 DATA_DELAY<=C;
-	 DATA_OUT<= DATA_MULT+DATA_DELAY;
-	end
+	reg_A<=A;
+	reg_B<=B;
+	reg_C<=C;
+	DATA_DELAY<=reg_C;	
 end
+//multiplication
+always_ff @(posedge clk)
+begin
+	DATA_MULT<= reg_A*reg_B;
+end
+
+//addition	
+always_ff @(posedge clk)
+	reg_DATA_OUT<=DATA_MULT+DATA_DELAY;
+	
+always @(posedge clk)
+	DATA_OUT=reg_DATA_OUT;	
 endmodule 
