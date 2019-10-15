@@ -21,7 +21,10 @@ module Verilog
   input wire [S-1:0] B,
   input wire [S-1:0] C,
 //------------------------------------
+  output reg [S*2-1:0] mult, // промежуточное умножение
   output reg [S*2-1:0] DATA_OUT);
+  
+  
   
 //task#2
   assign c = a*b;
@@ -35,9 +38,14 @@ end
 //------------------------------------
 
 //task#2.4
+always @(posedge clk) //Умножение
+begin
+	mult = A*B;
+end
+
 always @(posedge clk)
 begin
-  	DATA_OUT <= A*B+C; 
+  	DATA_OUT <= mult+C; 
 end       
 //------------------------------------
 endmodule
