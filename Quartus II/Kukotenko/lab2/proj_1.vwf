@@ -5,7 +5,7 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 
 /*
-Copyright (C) 1991-2009 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -105,7 +105,11 @@ TRANSITION_LIST("out_mul")
 	NODE
 	{
 		REPEAT = 1;
-		LEVEL X FOR 1000.0;
+		LEVEL 0 FOR 26.263;
+		LEVEL 1 FOR 30.38;
+		LEVEL 0 FOR 19.62;
+		LEVEL 1 FOR 10.38;
+		LEVEL 0 FOR 913.357;
 	}
 }
 
