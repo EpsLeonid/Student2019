@@ -1,4 +1,4 @@
-function m = filter(l, k, m1, m2, y)%функция фильтра
+function m = Filter(l, k, m1, m2, y)%функция фильтра
   
     [dk, dl, p, q, m, s] = deal(zeros(1, length(y)));  %задам значения параметров
   
