@@ -118,23 +118,23 @@ module filter (
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v6));
 
-	v7_filter FilterV1 (
+	v7_filter FilterV7 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v1));
+		.output_data                                          (output_data_v7));
 
-	v8_filter FilterV2 (
+	v8_filter FilterV8 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v2));
+		.output_data                                          (output_data_v8));
 
-	v9_filter FilterV3 (
+	v9_filter FilterV9 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v3));
+		.output_data                                          (output_data_v9));
 
 	v10_filter FilterV10 (
 		.clk                                                  (clk),
@@ -143,19 +143,19 @@ module filter (
 		.output_data                                          (output_data_v10));
 		
 
-	v11_filter FilterV1 (
+	v11_filter FilterV11 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v11));
 
-	v12_filter FilterV6 (
+	v12_filter FilterV12 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v12));
 
-	v13_filter FilterV1 (
+	v13_filter FilterV13 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
