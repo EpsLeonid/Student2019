@@ -37,10 +37,7 @@ end
 //task#2.4
 always @(posedge clk)
 begin
-  if (reset==1)
-    DATA_OUT <= 0;
-  else 
-	DATA_OUT <= A*B+C; 
+  	DATA_OUT <= A*B+C; 
 end       
 //------------------------------------
 endmodule
