@@ -80,13 +80,13 @@ module filter (
 		.rate												(test_rate),
 		.delay												(test_delay),
 		.output_data										(output_data_exp_sig_gen));
-/*
-	v1_filter FilterV1 (
-		.clk                                                  (clk),
+                            
+	v1_filter_FilterV1 (     //the module name has been changed because an error was thrown during compilation
+		.clk                                                  (clk),   
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v1));
-
+/*
 	v2_filter FilterV2 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
