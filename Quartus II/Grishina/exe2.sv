@@ -18,7 +18,10 @@ module exe2  //модуль для описания функий и переменных задания 2
 	input [par:0] A,
 	input [par:0] B,
 	input [par:0] C,
-	output reg [par*2+1:0] DATA_OUT //определение "правильной" ширины шины
+	output [par:0] C1,
+	output [par:0] C2,
+	output reg [par*2+1:0] DATA_OUT, //определение "правильной" ширины шины
+	output reg [par*2+1:0] R
 	
 );  
   
@@ -31,13 +34,33 @@ module exe2  //модуль для описания функий и переменных задания 2
 	out <=d;
 	end
 	
-//выполнение задание 2.4
-	always @(posedge clk)
-	begin
-	DATA_OUT <= A*B+C;
+//выполнение задания 2.4
 	
-end
+	//смещение С по clk
+	always @(posedge clk) 
+	begin
+	C1 <=C;
+	end
+	
+	//смещение С1 по clk
+	always @(posedge clk) 
+	begin
+	C2 <=C1;
+	end
+	
+	//выполнение умножения
+	always @(posedge clk)     
+	begin
+	R <= A*B;
+	end
+	
+//выполнение сложения 
+	always @(posedge clk)     
+	begin
+	DATA_OUT <= R+C2;	
+	end
 
 endmodule //конец работы модуля
-  
+
+
   
