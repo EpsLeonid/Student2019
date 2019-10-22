@@ -148,13 +148,13 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v11));
-
+*/
 	v12_filter FilterV12 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v12));
-
+/*
 	v13_filter FilterV13 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
