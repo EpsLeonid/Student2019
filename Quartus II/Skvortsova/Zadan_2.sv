@@ -1,4 +1,4 @@
-module Zadan_2(a,b,c,clk,A,B,C,DATA_OUT,clkd,d,out);
+module Zadan_2(a,b,c,clk,A,B,C,DATA_MULT,DATA_SUMM,DATA_OUT,clkd,d,out);
 
 // register
 import Zadan_2_par::*;
@@ -7,10 +7,10 @@ import Zadan_2_par::*;
   input [input_size-1:0] B;
   input [input_size-1:0] C;
 
-output [outinput_size-1:0] DATA_OUT;
- reg [outinput_size-1:0] DATA_OUT;
- reg [outinput_size-1:0] DATA_MULT;
- reg [outinput_size-1:0] DATA_SUMM; 
+output reg [outinput_size-1:0] DATA_OUT;
+// reg [outinput_size-1:0] DATA_OUT;
+output reg [outinput_size-1:0] DATA_MULT;
+output reg [outinput_size-1:0] DATA_SUMM; 
 
 // C=A*B
   input a;
@@ -27,7 +27,7 @@ output reg out;
  end
 
 // register (8)
-   always @ (clk) begin
+  always @ (clk) begin
    DATA_MULT<=A*B;
    DATA_SUMM<=C;
    DATA_OUT<=DATA_MULT+DATA_SUMM;
