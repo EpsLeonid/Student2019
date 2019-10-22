@@ -33,7 +33,7 @@ module Verilog
   reg [S-1:0] regA;
   reg [S-1:0] regB;
   reg [S-1:0] regC1; //Для задержки 
-        
+            
 //task#2
   assign c = a*b;
 //------------------------------------  
@@ -41,7 +41,10 @@ module Verilog
 //task#2.3
 always @(posedge clk) 
 begin
-   	out <=d;
+	if (reset == 1)
+		out <= 0;
+	else
+		out <=d;
 end
 //------------------------------------
 
