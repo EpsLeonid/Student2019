@@ -32,6 +32,7 @@ module Verilog
   reg [S-1:0] regC;
   reg [S-1:0] regA;
   reg [S-1:0] regB;
+  reg [S-1:0] regC1; //Для задержки 
       
 //task#2
   assign c = a*b;
@@ -50,6 +51,7 @@ begin
 	regA <= A;
 	regB <= B;
 	regC <= C;
+	regC1 <= regC;
 end
 
 //Умножение
@@ -61,7 +63,7 @@ end
 //Сложение
 always @ (posedge clk)
 begin
-	regAdd <= regMult+regC;
+	regAdd <= regMult+regC1;
 end
 
 assign DATA_OUT = regAdd;
