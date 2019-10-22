@@ -81,7 +81,7 @@ module filter (
 		.delay												(test_delay),
 		.output_data										(output_data_exp_sig_gen));
                             
-	v1_filter_FilterV1 (     //the module name has been changed because an error was thrown during compilation
+	v1_filter FilterV1 ( 
 		.clk                                                  (clk),   
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
