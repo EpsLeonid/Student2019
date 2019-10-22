@@ -17,15 +17,22 @@ module Verilog
   output reg out,
 
 //----task#2.4 Регистр
+//Входные данные
   input wire [S-1:0] A,
   input wire [S-1:0] B,
   input wire [S-1:0] C,
-//------------------------------------
-  output reg [S*2-1:0] mult, // промежуточное умножение
-  output reg [S*2-1:0] DATA_OUT);
-  
-  
-  
+//Выходная шина
+  output reg [S*2-1:0] DATA_OUT,
+//Для проверки промежуточного умножения и сложения
+  output [S*2-1:0] ch1,
+  output [S*2-1:0] ch2);
+
+  reg [S*2-1:0] regMult;
+  reg [S*2-1:0] regAdd;
+  reg [S-1:0] regC;
+  reg [S-1:0] regA;
+  reg [S-1:0] regB;
+      
 //task#2
   assign c = a*b;
 //------------------------------------  
@@ -33,19 +40,32 @@ module Verilog
 //task#2.3
 always @(posedge clk) 
 begin
-   out <=d;
+   	out <=d;
 end
 //------------------------------------
 
 //task#2.4
-always @(posedge clk) //Умножение
+always @(posedge clk) //Операция выполняется, когда на clock приходит передний фронт
 begin
-	mult = A*B;
+	regA <= A;
+	regB <= B;
+	regC <= C;
 end
 
-always @(posedge clk)
+//Умножение
+always @ (posedge clk)
 begin
-  	DATA_OUT <= mult+C; 
-end       
+	regMult <= regA*regB;
+end
+
+//Сложение
+always @ (posedge clk)
+begin
+	regAdd <= regMult+regC;
+end
+
+assign DATA_OUT = regAdd;
+assign ch1 = regMult;
+assign ch2 = regAdd;      
 //------------------------------------
 endmodule
