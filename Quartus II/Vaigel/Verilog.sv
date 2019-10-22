@@ -64,10 +64,10 @@ end
 always @ (posedge clk)
 begin
 	regAdd <= regMult+regC1;
+	DATA_OUT = regAdd;
+	ch1 = regMult;
+	ch2 = regAdd;
 end
-
-assign DATA_OUT = regAdd;
-assign ch1 = regMult;
-assign ch2 = regAdd;      
+     
 //------------------------------------
 endmodule
