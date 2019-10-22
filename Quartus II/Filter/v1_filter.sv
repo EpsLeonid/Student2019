@@ -33,9 +33,9 @@ reg signed [SIZE_ADC_DATA+6:0] s;
 //s(n)=s(n-1)+r(n),n>=0
 //M=1/(exp(Tclk/t)-1)
 
-always @(posedge clk or posedge reset)
+always @(posedge clk or posedge !reset)
 begin
-	if(reset)
+	if(!reset)
 		begin
 		d1<=0;
 		d11<=0;
