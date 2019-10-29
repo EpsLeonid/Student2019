@@ -27,9 +27,10 @@ reg	[SIZE_ADC_DATA-1 : 0] p [1:0];
 reg	[SIZE_ADC_DATA-1+4 : 0] r;
 reg	[SIZE_ADC_DATA-1+4 : 0] s[1:0];
 
+//Задание первых элементов массивов
 always @( posedge clk or posedge !reset)
 begin 
-	if(!reset) //Задание первых элементов массивов
+	if(!reset) 
 	begin
 		for(int i=0; i<N; i++)
 			data[i] <= 0;
