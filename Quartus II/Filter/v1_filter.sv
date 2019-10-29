@@ -23,15 +23,19 @@ module v1_filter
 	input	clk,
 	input	reset,
 	input   [SIZE_ADC_DATA-1 : 0]	input_data,
-	output	[SIZE_FILTER_DATA : 0]	output_data
+	output	[SIZE_FILTER_DATA-1 : 0]	output_data
 );
 
 //Parameters
-reg	[SIZE_ADC_DATA-1 : 0] data_delay [N-1 : 0];
-reg	[SIZE_ADC_DATA-1 : 0] d;
-reg	[SIZE_ADC_DATA-1 : 0] p [1:0];
-reg	[SIZE_ADC_DATA-1+4 : 0] r;
-reg	[SIZE_ADC_DATA-1+4 : 0] s[1:0];
+reg	unsigned [SIZE_ADC_DATA-1 : 0] data_delay [N-1 : 0];
+reg	unsigned [SIZE_ADC_DATA-1 : 0] d;
+reg	unsigned [SIZE_ADC_DATA-1 : 0] d1;
+reg	unsigned [SIZE_ADC_DATA-1 : 0] d2;
+reg	unsigned [SIZE_ADC_DATA-1 : 0] p ;
+reg	unsigned [SIZE_ADC_DATA-1 : 0] p_1 ;
+reg	unsigned [SIZE_ADC_DATA+8 : 0] Md;
+reg	unsigned [SIZE_ADC_DATA+8 : 0] r;
+reg	unsigned [SIZE_ADC_DATA+8 : 0] s;
 
 //First elements of the array
 always @( posedge clk or posedge !reset)
@@ -40,10 +44,15 @@ begin
 	begin
 		for(int i=0; i<N ; i++)
 			data_delay[i] <= 0;
-
-		p[1] <= 0;
-
-		s[1] <= 0;
+		d1<=0; 
+		d2<=0; 
+		d<=0; 
+		p <= 0;
+		Md<=0;
+		p_1<=0;
+		r<=0;
+		s <= 0;
+		output_data<=0;
 		
 	end
 	else
@@ -52,19 +61,21 @@ begin
 			data_delay[i] <= data_delay[i-1];
 		data_delay[0] <= input_data;
 		
-		p[1]<=p[0];
-		s[1]<=s[0];
+		d1 = data_delay[0] - data_delay[K] ;
+		d2 = data_delay[L] + data_delay[K+L];
+		d=d1-d2;
+		p =  p + d;
+		Md=M*d;
+		p_1=p;
+		r =  p_1 + Md;
+		s = s+r;
+		output_data = s>>>7;
 		
 	end
 	
 end
 
 //Output parameters
-assign d = !reset ? 0 : data_delay[0] - data_delay[K] - data_delay[L] + data_delay[K+L];
-assign p[0] = !reset ? 0 : p[1] + d;
-assign r = !reset ? 0 : p[0] + M*d;
-assign s[0] = !reset ? 0 : s[1]+r;
 
-assign output_data = s[0];
 
 endmodule
