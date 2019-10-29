@@ -60,7 +60,7 @@ begin
 end
 
 //Output parameters
-assign d = !reset ? 0 : data_delay[0] - data_delay[K-1] - data_delay[L-1] + data_delay[K+L-1];
+assign d = !reset ? 0 : data_delay[0] - data_delay[K] - data_delay[L] + data_delay[K+L];
 assign p[0] = !reset ? 0 : p[1] + d;
 assign r = !reset ? 0 : p[0] + M*d;
 assign s[0] = !reset ? 0 : s[1]+r;
