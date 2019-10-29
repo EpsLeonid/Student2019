@@ -39,16 +39,20 @@ end
 
 //Модуль с  8-ми разрядным регистром и работающем на частоте 200 МГц
 reg [Width-1:0] DELAY; //Регистр для создания задержки
+reg [Width-1:0] DELAY2; //Регистр для создания 2-ой задержки
 reg [2*Width-1:0] MULT; //"Промежуточный" регистр для хранения значения произведения А4 и B4
 
 always @(posedge clk) begin
-	DELAY = C4; //Задержка
+	DELAY <= C4; //Задержка
+end
+always @(posedge clk) begin
+	DELAY2 <= DELAY; //Вторая задержка
 end
 
 always_ff @(posedge clk) 
 	MULT <= A4 * B4; //DATA_OUT = A4 * B4
 
 always_ff @(posedge clk) 
-	DATA_OUT <= MULT + DELAY; //DATA_OUT = (A4 * B4) + C4
+	DATA_OUT <= MULT + DELAY2; //DATA_OUT = (A4 * B4) + C4
 
 endmodule
