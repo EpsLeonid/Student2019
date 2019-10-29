@@ -12,58 +12,55 @@ import v1_parameters::*;
 
 //parameter SIZE_ADC_DATA                                  = 14;
 //parameter SIZE_FILTER_DATA                               = 16;
-module v1_filter
-/*#(	parameter	K = 8;
+
+/* parameter	K = 8;
 	parameter	L = 5;
 	parameter	M = 16;
-	parameter	N = 13)*/
+	parameter	N = 13*/
+module v1_filter
 (
+//Input and output signals
 	input	clk,
 	input	reset,
 	input   [SIZE_ADC_DATA-1 : 0]	input_data,
 	output	[SIZE_FILTER_DATA : 0]	output_data
 );
 
-reg	[SIZE_ADC_DATA-1 : 0] data [N-1 : 0];
+//Parameters
+reg	[SIZE_ADC_DATA-1 : 0] data_delay [N-1 : 0];
 reg	[SIZE_ADC_DATA-1 : 0] d;
 reg	[SIZE_ADC_DATA-1 : 0] p [1:0];
 reg	[SIZE_ADC_DATA-1+4 : 0] r;
 reg	[SIZE_ADC_DATA-1+4 : 0] s[1:0];
+
+//First elements of the array
 always @( posedge clk or posedge !reset)
 begin
 	if(!reset)
 	begin
 		for(int i=0; i<N ; i++)
-			data[i] <= 0;
+			data_delay[i] <= 0;
 
 		p[1] <= 0;
 
 		s[1] <= 0;
 		
-		/*d<=0;
-		p[0]<=0;
-		r<=0;
-		s[0]<=0;*/
 	end
 	else
 	begin
 		for(int i=1; i<N ; i++)
-			data[i] <= data[i-1];
-		data[0] <= input_data;
+			data_delay[i] <= data_delay[i-1];
+		data_delay[0] <= input_data;
 		
 		p[1]<=p[0];
 		s[1]<=s[0];
 		
-		/*d<=data[0] - data[K-1] - data[L-1] + data[K+L-1];
-		p[0]<= p[1] + d;
-		r<= p[0] + M*d;
-		s[0]<=s[1]+r;*/ //there are delays
 	end
 	
 end
 
-
-assign d = !reset ? 0 : data[0] - data[K-1] - data[L-1] + data[K+L-1];
+//Output parameters
+assign d = !reset ? 0 : data_delay[0] - data_delay[K-1] - data_delay[L-1] + data_delay[K+L-1];
 assign p[0] = !reset ? 0 : p[1] + d;
 assign r = !reset ? 0 : p[0] + M*d;
 assign s[0] = !reset ? 0 : s[1]+r;
