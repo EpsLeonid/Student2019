@@ -17,65 +17,64 @@ import v1_parameters::*;
 	parameter	L = 5;
 	parameter	M = 16;
 	parameter	N = 13*/
+
 module v1_filter
 (
-//Input and output signals
-	input	clk,
-	input	reset,
-	input   [SIZE_ADC_DATA-1 : 0]	input_data,
-	output	[SIZE_FILTER_DATA-1 : 0]	output_data
-);
+  //Input signals
+  input wire                                              reset,
+  input wire                                              clk,
+  input wire [SIZE_ADC_DATA-1:0]                          input_data,
+  //Output signal
+  output reg signed [SIZE_FILTER_DATA-1:0]                output_data);
 
 //Parameters
-reg	unsigned [SIZE_ADC_DATA-1 : 0] data_delay [N-1 : 0];
-reg	unsigned [SIZE_ADC_DATA-1 : 0] d;
-reg	unsigned [SIZE_ADC_DATA-1 : 0] d1;
-reg	unsigned [SIZE_ADC_DATA-1 : 0] d2;
-reg	unsigned [SIZE_ADC_DATA-1 : 0] p ;
-reg	unsigned [SIZE_ADC_DATA-1 : 0] p_1 ;
-reg	unsigned [SIZE_ADC_DATA+8 : 0] Md;
-reg	unsigned [SIZE_ADC_DATA+8 : 0] r;
-reg	unsigned [SIZE_ADC_DATA+8 : 0] s;
-
+  reg  [SIZE_ADC_DATA+6:0]                          data_delay [N :0];
+  reg  [SIZE_ADC_DATA+6:0]                          d;
+  reg  [SIZE_ADC_DATA+6:0]                          d1;
+  reg  [SIZE_ADC_DATA+6:0]                          d2;
+  reg  [SIZE_ADC_DATA+6:0]                          p;
+  reg  [SIZE_ADC_DATA+6:0]                          p_1;
+  reg  [SIZE_ADC_DATA+6:0]                          Md;
+  reg  [SIZE_ADC_DATA+6:0]                          r;
+  reg  [SIZE_ADC_DATA+6:0]                          s;
+ 
 //First elements of the array
-always @( posedge clk or posedge !reset)
-begin
-	if(!reset)
+always @ (posedge clk or negedge reset)
 	begin
-		for(int i=0; i<N ; i++)
-			data_delay[i] <= 0;
-		d1<=0; 
-		d2<=0; 
-		d<=0; 
-		p <= 0;
-		Md<=0;
-		p_1<=0;
-		r<=0;
-		s <= 0;
-		output_data<=0;
+		if (!reset)
+		begin
+		d  <= 0;
+		d1 <= 0;
+		d2 <= 0;
+		p  <= 0;
+		p_1<= 0;
+		Md <= 0;
+		r  <= 0;
+		s  <= 0;
+		for (integer i = 0; i<=N ; i++)
+			begin
+				data_delay[i] <= 0;
+			end
+		output_data <= 0;
+		end
 		
-	end
-	else
-	begin
-		for(int i=1; i<N ; i++)
-			data_delay[i] <= data_delay[i-1];
+		else
+		begin
 		data_delay[0] <= input_data;
-		
-		d1 = data_delay[0] - data_delay[K] ;
-		d2 = data_delay[L] + data_delay[K+L];
-		d=d1-d2;
-		p =  p + d;
-		Md=M*d;
-		p_1=p;
-		r =  p_1 + Md;
-		s = s+r;
-		output_data = s>>>7;
-		
-	end
-	
-end
-
+		for (integer i = 1; i<=N ; i++)
+			begin
+				data_delay[i] <= data_delay[i-1];
+			end
 //Output parameters
-
-
-endmodule
+		d <= data_delay[0] - data_delay[K];
+		d1<= data_delay[L] - data_delay[K+ L];
+		d2 <= d - d1; 
+		p  <= p + d2;
+		Md  <= M  * d2;
+	    p_1 <= p;
+		r <= p_1 + Md;
+		s <= s + r;
+		output_data <= s >>> 7; 
+		end  
+	end 
+endmodule 
