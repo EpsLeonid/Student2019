@@ -1,30 +1,26 @@
 import package_settings::*;
-//import v12_filter_parameters::*;
+import v12_filter_parameters::*;
 
 module v12_filter
-#(	parameter	k = 5;
-	parameter	l = 5;
-	parameter	M = 16;
-	parameter	numSliceData = 10)
 (
 // Входные данные
 	input	clk,
 	input	reset,
 	input	[SIZE_ADC_DATA-1 : 0]	input_data,
 // Выходные данные
-	output	[SIZE_ADC_DATA-1+4 : 0]	test_data[9:0],
+	output	[size-1: 0]	test_data[9:0],
 									test_d,
 									test_p[1:0],
 									test_r,
 									test_s[1:0],
-	output	[SIZE_FILTER_DATA : 0]	output_data
+	output	[size-1 : 0]	output_data
 );
 
-logic	[SIZE_ADC_DATA-1 : 0] data [9 : 0];
-logic	[SIZE_ADC_DATA-1 : 0] d;
-logic	[SIZE_ADC_DATA-1 : 0] p [1:0];
-logic	[SIZE_ADC_DATA-1+4 : 0] r;
-logic	[SIZE_ADC_DATA-1+4 : 0] s[1:0];
+logic	[size-1 : 0] data [9 : 0];
+logic	[size-1 : 0] d;
+logic	[size-1 : 0] p [1:0];
+logic	[size-1 : 0] r;
+logic	[1:0][size-1 : 0] s;
 always_ff @( posedge clk or posedge !reset)
 begin
 	if(!reset)
@@ -44,7 +40,7 @@ begin
 		
 		p[1]<=p[0];
 		s[1]<=s[0];
-		
+		output_data <= s[0][19:4];
 
 
 	end//else
@@ -52,10 +48,10 @@ end//always_ff
 
 assign d = !reset ? 0 : data[0] - data[k-1] - data[l-1] + data[k+l-1];
 assign p[0] = !reset ? 0 : p[1] + d;
-assign r = !reset ? 0 : p[0] + M*d;
+assign r = !reset ? 0 : p[0] + m*d;
 assign s[0] = !reset ? 0 : s[1]+r;
 
-assign output_data = s[0];
+//assign output_data = s[0][19:4];
 genvar i;
 generate
 for(i=0; i < numSliceData; i++) 
