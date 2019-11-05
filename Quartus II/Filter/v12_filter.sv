@@ -40,16 +40,23 @@ begin
 		
 		p[1]<=p[0];
 		s[1]<=s[0];
+		
+		d <= data[0] - data[k-1] - data[l-1] + data[k+l-1];
+		p[0] <=  p[1] + d;
+		r <= p[0] + m*d;
+		s[0] <= s[1]+r;
 		output_data <= s[0][19:4];
+
+
 
 
 	end//else
 end//always_ff
 
-assign d = !reset ? 0 : data[0] - data[k-1] - data[l-1] + data[k+l-1];
-assign p[0] = !reset ? 0 : p[1] + d;
-assign r = !reset ? 0 : p[0] + m*d;
-assign s[0] = !reset ? 0 : s[1]+r;
+//assign d = !reset ? 0 : data[0] - data[k-1] - data[l-1] + data[k+l-1];
+//assign p[0] = !reset ? 0 : p[1] + d;
+//assign r = !reset ? 0 : p[0] + m*d;
+//assign s[0] = !reset ? 0 : s[1]+r;
 
 //assign output_data = s[0][19:4];
 genvar i;
