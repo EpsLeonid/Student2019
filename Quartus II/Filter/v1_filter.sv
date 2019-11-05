@@ -74,7 +74,7 @@ always @ (posedge clk or negedge reset)
 	    p_1 <= p;
 		r <= p_1 + Md;
 		s <= s + r;
-		output_data <= s >>> 7; 
+		output_data <= s >>> 4; 
 		end  
 	end 
 endmodule 
