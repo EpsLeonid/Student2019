@@ -18,9 +18,11 @@ module v12_filter
 
 logic	[size-1 : 0] data [9 : 0];
 logic	[size-1 : 0] d;
+logic	[size-1 : 0] d1;
+logic	[size-1 : 0] d2;
 logic	[size-1 : 0] p [1:0];
 logic	[size-1 : 0] r;
-logic	[1:0][size-1 : 0] s;
+logic	[2:0][size-1 : 0] s;
 always_ff @( posedge clk or posedge !reset)
 begin
 	if(!reset)
@@ -41,11 +43,14 @@ begin
 		p[1]<=p[0];
 		s[1]<=s[0];
 		
-		d <= data[0] - data[k-1] - data[l-1] + data[k+l-1];
-		p[0] <=  p[1] + d;
-		r <= p[0] + m*d;
+		d <= data[0] - data[k-1];
+		d1 <= data[l-1] + data[k+l-1];
+		d2 <= d - d1;
+		p[0] <=  p[1] + d2;
+		r <= p[0] + m*d2;
 		s[0] <= s[1]+r;
-		output_data <= s[0][19:4];
+		s[2] <= s[0];
+		output_data <= s[2][19:4];
 
 
 
