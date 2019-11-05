@@ -21,16 +21,16 @@ input [SIZE_ADC_DATA - 1 : 0]	input_data,
 //Выходные данные:
 output	[SIZE_FILTER_DATA : 0]	output_data);
 //Параметры для расчета трапецидального фильтра
-reg	[SIZE_ADC_DATA-1 : 0] data [N-1:0];
-reg	[SIZE_ADC_DATA-1 : 0] d;
-reg	[SIZE_ADC_DATA-1 : 0] d1;
-reg	[SIZE_ADC_DATA-1 : 0] d2;
-reg	[SIZE_ADC_DATA-1 : 0] p;
-reg	[SIZE_ADC_DATA+7 : 0] r;
-reg	[SIZE_ADC_DATA+7 : 0] r1;
-reg	[SIZE_ADC_DATA+7 : 0] s;
-reg	[SIZE_ADC_DATA+7 : 0] output_s;
-reg	[SIZE_ADC_DATA-1 : 0] mult_Md;
+reg	[SIZE_ADC_DATA+6 : 0] data [N-1:0];
+reg	[SIZE_ADC_DATA+6 : 0] d;
+reg	[SIZE_ADC_DATA+6 : 0] d1;
+reg	[SIZE_ADC_DATA+6 : 0] d2;
+reg	[SIZE_ADC_DATA+6 : 0] p;
+reg	[SIZE_ADC_DATA+6 : 0] r;
+reg	[SIZE_ADC_DATA+6 : 0] r1;
+reg	[SIZE_ADC_DATA+6 : 0] s;
+reg	[SIZE_ADC_DATA+6 : 0] output_s;
+reg	[SIZE_ADC_DATA+6 : 0] mult_Md;
 
 //Задание первых элементов массивов
 always @( posedge clk or posedge !reset)
@@ -64,7 +64,7 @@ begin
 			r <= p + mult_Md;
 			r1 <= r;
 			s <= s[0] + r1;
-			output_data <= s >> 7;				
+			output_data <= s >>> 4;				
 	end
 			
 end
