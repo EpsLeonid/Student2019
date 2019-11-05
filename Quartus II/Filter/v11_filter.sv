@@ -9,7 +9,7 @@ import v11_filter_parameters::*;
 //M = 1/(exp(Tclk/tau) - 1)
 
 module v11_filter
-#(	parameter	k = 8;
+#(parameter	k = 8;
 	parameter	l = 5;
 	parameter	M = 16;
 	parameter   N = 13)
@@ -49,21 +49,23 @@ begin
 	else
 	begin
 		for(int i=1; i<N ; i++)
+			begin
 			data[i] <= data[i-1];
 			data[0] <= input_data;		
 			p[1] <= p[0];
 			s[1] <= s[0];
+			end
 			
 			//Вывод d(n), p(n), r(n), s(n)
 			//d <= data[0] - data[k] - data[l] + data[k+l];
 			d1 <= data[0] + data[k+l];
 			d2 <= data[k] + data[l];
 			d <= d1 - d2;
-			p <= p[0] + d;
+			p <= p + d;
 			mult_Md = M*d;
 			r <= p + mult_Md;
 			r1 <= r;
-			s <= s[0] + r1;
+			s <= s + r1;
 			output_data <= s >>> 4;				
 	end
 			
