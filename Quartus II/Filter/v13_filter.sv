@@ -28,23 +28,18 @@ output reg  [SIZE_FILTER_DATA : 0]	output_data
 		
 	reg [SIZE -1 : 0] dk;
 	reg [1:0] [SIZE -1 : 0] dl;	
-	reg [SIZE -1 : 0] p1;
-	reg [SIZE -1 : 0] dl_mult_k;
-	reg [SIZE -1 : 0] p2;
-	reg [SIZE -1 : 0] m2_mult_p2;
 	reg [1:0] [SIZE -1 : 0] q;
 	reg [SIZE-1 : 0] s1;
 	reg [1:0][SIZE -1 : 0] s;
 	reg [1:0][SIZE -1 : 0] p;
-	reg [SIZE -1 : 0] m1_mult_p2;
-	reg [SIZE -1 : 0] s2;
+	reg [2:0][SIZE -1 : 0] s2;
 	
 
 always @ (posedge clk or negedge reset) begin
 		if (!reset) 
 	
 	begin
-	
+//Задание первых элементов массивов
 			for (int i = 1; i <= k_13; i++)			
 			data[i] <= 0;
 			
@@ -60,7 +55,7 @@ always @ (posedge clk or negedge reset) begin
 	else
 	begin
 
-			
+//Задание остальных элементов 		
 			for (int i = 1; i <= k_13; i++)			
 			data[i]	<= data[i-1];
 			
@@ -81,10 +76,10 @@ always @ (posedge clk or negedge reset) begin
 			p[0] <= p[1]+ dk - k*dl[l_13-1];
 			q[0]= q[1]+m2*p[0];
 			s[0]= s[1] +q[0]+m1*p[0];
-			
-			
-					
-			output_data		<= s[0][19:4];
+			s2[0] <=s[0];
+			s2[1] <=s2[0];
+			s2[2] <=s2[1];		
+			output_data		<= s2[2][19:4];
 	
 	end
 end
