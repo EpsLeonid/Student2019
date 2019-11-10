@@ -6,9 +6,7 @@ module reg_8bit (
 	input clk,
 	output [2*R-1:0] out
 );
-	reg [2*R-1:0] ab;
 	always @(posedge clk) begin
-		ab<=A*B;
-		out<=(ab)+C;
+		out<=(A*B)+C;
 	end
 endmodule
