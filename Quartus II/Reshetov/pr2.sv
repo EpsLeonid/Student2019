@@ -29,7 +29,7 @@ always@(posedge clk)
 	out = d;
 
 //task 2.4
-
+//регистры, необходимые для сдвига данных, что бы корректно выполнялись операции умножения и сложения
 reg [7:0] shift_a;
 reg [7:0] shift_b;
 reg [7:0] shift_c1;
@@ -39,7 +39,7 @@ reg [15:0] Res;
 
 always@(posedge clk)
 	begin
-	//data_out = a*b + c;
+	//сдвиг данных
 	shift_a <= a;
 	shift_b <= b;
 	shift_c1 <= c;
@@ -47,11 +47,13 @@ always@(posedge clk)
 	end
 
 always@(posedge clk)
+    //умножение
 	mult = shift_a * shift_b;
 
 always@(posedge clk)
+	//сложение
 	Res = mult + shift_c2;
-
+//соединение регистров с выходами
 assign regA1 = shift_a;
 assign regB1 = shift_b;
 assign regC1 = shift_c1;
