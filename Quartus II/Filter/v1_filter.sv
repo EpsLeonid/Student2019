@@ -25,10 +25,10 @@ module v1_filter
   input wire                                              clk,
   input wire [SIZE_ADC_DATA-1:0]                          input_data,
   //Output signal
-  output reg signed [SIZE_FILTER_DATA-1:0]                output_data);
+  output reg [SIZE_FILTER_DATA-1:0]                		  output_data);
 
 //Parameters
-  reg  [SIZE_ADC_DATA+6:0]                          data_delay [N :0];
+  reg  [SIZE_ADC_DATA+6:0]                          data_delay [N_1 :0];
   reg  [SIZE_ADC_DATA+6:0]                          d;
   reg  [SIZE_ADC_DATA+6:0]                          d1;
   reg  [SIZE_ADC_DATA+6:0]                          d2;
@@ -51,7 +51,7 @@ always @ (posedge clk or negedge reset)
 		Md <= 0;
 		r  <= 0;
 		s  <= 0;
-		for (integer i = 0; i<=N ; i++)
+		for (integer i = 0; i<=N_1 ; i++)
 			begin
 				data_delay[i] <= 0;
 			end
@@ -61,16 +61,16 @@ always @ (posedge clk or negedge reset)
 		else
 		begin
 		data_delay[0] <= input_data;
-		for (integer i = 1; i<=N ; i++)
+		for (integer i = 1; i<=N_1 ; i++)
 			begin
 				data_delay[i] <= data_delay[i-1];
 			end
 //Output parameters
-		d <= data_delay[0] - data_delay[K];
-		d1<= data_delay[L] - data_delay[K+ L];
+		d <= data_delay[0] - data_delay[K_1];
+		d1<= data_delay[L_1] - data_delay[K_1+ L_1];
 		d2 <= d - d1; 
 		p  <= p + d2;
-		Md  <= M  * d2;
+		Md  <= M_1  * d2;
 	    p_1 <= p;
 		r <= p_1 + Md;
 		s <= s + r;
