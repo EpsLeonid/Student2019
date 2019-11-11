@@ -58,10 +58,10 @@ always @ (posedge clk or posedge !reset)
 			end
 //Вывод d(n), p(n), r(n), s(n)
 		d1 <= data[0] - data[k_11];
-		d2<= data[l_11] - data[k_11+ l_11];
+		d2<= data[l_11] - data[k_11 + l_11];
 		d <= d1 - d2; 
 		p  <= p + d;
-		mult_Md  <= M_11  * d;
+		mult_Md  <= M_11*d;
 	    p1 <= p;
 		r <= p1 + mult_Md;
 		s <= s + r;
