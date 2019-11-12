@@ -7,7 +7,9 @@ module v15_filter(
 	input [SIZE_ADC_DATA-1 : 0]	input_data,
 	output [SIZE_FILTER_DATA-1:0] output_data
 );
+	logic [dataSize-1:0]d;
 	logic [dataSize-1:0]p[1:0];
+	logic [dataSize-1:0]r;
 	logic [dataSize-1:0]s[1:0];
 	logic [SIZE_ADC_DATA-1:0]data[bufferSize-1:0];
 	always @(posedge clk) begin
@@ -26,7 +28,11 @@ module v15_filter(
 			s[1]<=s[0];
 			p[1]<=p[0];
 			output_data<=s[0][dataSize-1:dataSize-SIZE_ADC_DATA];
-			p[0]=
+			d<=data[0]-data[l]-data[k]+data[k+l];
+			p[0]<=p[1]+d;
+			r<=M*d+p[0];
+			s[0]=s[1]+r;
+			output_data	<= s[0][dataSize-1:4];
 		end
 	end
 endmodule
