@@ -27,7 +27,7 @@ module v15_filter(
 			data[0]<=input_data;
 			s[1]<=s[0];
 			p[1]<=p[0];
-			d<=data[0]-data[l]-data[k]+data[k+l];
+			d<=data[0]-data[l-1]-data[k-1]+data[k+l-1];
 			p[0]<=p[1]+d;
 			r<=M*d+p[0];
 			s[0]<=s[1]+r;
