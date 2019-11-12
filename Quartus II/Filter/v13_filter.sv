@@ -24,7 +24,7 @@ output reg  [SIZE_FILTER_DATA : 0]	output_data
 );
 //Параметры cusp-like фильтра
 
-	reg	[SIZE-1 : 0] data [N-1:0];
+	reg	[SIZE-1 : 0] data [N_13-1:0];
 		
 	reg [SIZE -1 : 0] dk;
 	reg [1:0] [SIZE -1 : 0] dl;	
@@ -43,11 +43,9 @@ always @ (posedge clk or negedge reset) begin
 			for (int i = 1; i <= k_13; i++)			
 			data[i] <= 0;
 			
-			p2[1] <= 0;
-			s2[1] <= 0;	
-			dl_mult_k <= 0;
-			m2_mult_p2 <= 0;	
-			m1_mult_p2 <= 0;
+			//p2[1] <= 0;
+			//s2[1] <= 0;	
+				
 			dk <= 0;
 			dl <= 0;
 	end
@@ -74,8 +72,8 @@ always @ (posedge clk or negedge reset) begin
 			
 			
 			p[0] <= p[1]+ dk - k*dl[l_13-1];
-			q[0]= q[1]+m2*p[0];
-			s[0]= s[1] +q[0]+m1*p[0];
+			q[0]= q[1]+m2_13*p[0];
+			s[0]= s[1] +q[0]+m1_13*p[0];
 			s2[0] <=s[0];
 			s2[1] <=s2[0];
 			s2[2] <=s2[1];		
