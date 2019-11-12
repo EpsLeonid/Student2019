@@ -27,12 +27,11 @@ module v15_filter(
 			data[0]<=input_data;
 			s[1]<=s[0];
 			p[1]<=p[0];
-			output_data<=s[0][dataSize-1:dataSize-SIZE_ADC_DATA];
 			d<=data[0]-data[l]-data[k]+data[k+l];
 			p[0]<=p[1]+d;
 			r<=M*d+p[0];
 			s[0]<=s[1]+r;
-			output_data	<= s[0][dataSize-1:4];
+			output_data	<= =s[0][dataSize-1:dataSize-SIZE_ADC_DATA];
 		end
 	end
 endmodule
