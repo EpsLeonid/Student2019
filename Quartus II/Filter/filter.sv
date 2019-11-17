@@ -179,13 +179,13 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v16));
-
+*/
 	v17_filter FilterV17 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v17));
-
+/*
 	v18_filter FilterV18 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
