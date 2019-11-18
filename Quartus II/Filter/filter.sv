@@ -128,14 +128,14 @@ module filter (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v8));
+		.output_data                                          (output_data_v8));*/
 
 	v9_filter FilterV9 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v9));
-*/	
+	
 	v10_filter FilterV10 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
