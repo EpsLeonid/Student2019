@@ -3,25 +3,25 @@ import v12_filter_parameters::*;
 
 module v12_filter
 (
-
+// Входные данные
   input                         reset,
   input                         clk,
   input  [SIZE_ADC_DATA-1:0]    input_data,
-
+// Выходные данные
   output [SIZE_FILTER_DATA-1:0] output_data);
 
-
-  reg  [size:0]  data [N_11 :0];
-  reg  [size:0]  d;
-  reg  [size:0]  d_1;
-  reg  [size:0]  d_2;
-  reg  [size:0]  p;
-  reg  [size:0]  p_1;
-  reg  [size:0]  mult;
-  reg  [size:0]  r;
-  reg  [size:0]  s;
+// регистры памяти
+  bit  [size:0]  data [N_11 :0];
+  bit  [size:0]  d;
+  bit  [size:0]  d_1;
+  bit  [size:0]  d_2;
+  bit  [size:0]  p;
+  bit  [size:0]  p_1;
+  bit  [size:0]  mult;
+  bit  [size:0]  r;
+  bit  [size:0]  s;
  
-
+// По переднему фронту выполни
 always @ (posedge clk or posedge !reset)
 	begin
 		if (!reset)
