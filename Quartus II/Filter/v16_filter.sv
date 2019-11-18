@@ -19,17 +19,17 @@ output [SIZE_FILTER_DATA:0] output_data
 //регистры для хранения выходных аргументов 
 reg[saveDataSize:0][SIZE_ADC_DATA:0] save_data;
 
-reg[SIZE_ADC_DATA+6:0] dk;
-reg[SIZE_ADC_DATA+6:0] dl;
-reg[SIZE_ADC_DATA+6:0] q;
-reg[SIZE_ADC_DATA+6:0] p;
-reg[SIZE_ADC_DATA+6:0] s;
-reg[SIZE_ADC_DATA+6:0] dl_k;
-reg[SIZE_ADC_DATA+6:0] p_m2;
-reg[SIZE_ADC_DATA+6:0] p_m1;
-reg[SIZE_ADC_DATA+6:0] offset1;
-reg[SIZE_ADC_DATA+6:0] offset2;
-reg[SIZE_ADC_DATA+6:0] offset3;
+reg[20:0] dk;
+reg[20:0] dl;
+reg[20:0] q;
+reg[20:0] p;
+reg[20:0] s;
+reg[20:0] dl_k;
+reg[20:0] p_m2;
+reg[20:0] p_m1;
+reg[20:0] offset1;
+reg[20:0] offset2;
+reg[20:0] offset3;
 //когда приходит положительный фронт, тогда в новую ячейку
 //памяти(регистр) записываются данные в какой-то момент времени
 always@(posedge clk or negedge reset)
