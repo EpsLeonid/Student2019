@@ -11,15 +11,15 @@ import package_settings::*;
 import v17_filter_parameters::*;
 
 //параметры
-reg	[SizE-1 : 0] data [N_17-1:0];
-reg	[SizE-1 : 0] d;
-reg	[SizE-1 : 0] d1;
-reg	[SizE-1 : 0 ] d2;
-reg	[SizE-1 : 0 ] p;
-reg	[SizE-1 : 0 ] p1;
-reg	[SizE-1 : 0 ] r;
-reg	[SizE-1 : 0 ] s;
-reg	[SizE-1 : 0] Md;
+reg	[SizE : 0] data [N_17:0];
+reg	[SizE : 0] d;
+reg	[SizE : 0] d1;
+reg	[SizE : 0 ] d2;
+reg	[SizE : 0 ] p;
+reg	[SizE : 0 ] p1;
+reg	[SizE : 0 ] r;
+reg	[SizE : 0 ] s;
+reg	[SizE : 0] Md;
 
 //первые элементы
 always @( posedge clk or posedge !reset)
