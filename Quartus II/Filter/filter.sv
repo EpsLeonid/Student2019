@@ -105,7 +105,7 @@ module filter (
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v4));*/
 		
-	/*
+	
 	v5_filter FilterV5 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
