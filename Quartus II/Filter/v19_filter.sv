@@ -1,56 +1,66 @@
 import package_settings::*;
-import v19_filter_parameters::*;
-
+import v19_parameters::*;
 
 module v19_filter
 (
-	//input data
-	input wire clk,
-	input wire reset,
-	input wire [SIZE_ADC_DATA - 1 : 0] input_data,
-	//output data
-	output wire	[SIZE_FILTER_DATA-1 : 0] output_data
+input [SIZE_ADC_DATA:0] input_data,
+input clk,
+input reset,
+output [SIZE_FILTER_DATA:0] output_data
 );
-//parameters
-reg	[MSize_19-1 : 0] data [N_19-1:0];
-reg	[MSize_19-1 : 0] d;
-reg	[MSize_19-1 : 0] d1;
-reg	[MSize_19-1 : 0] d2;
-reg	[MSize_19-1 : 0] p;
-reg	[MSize_19-1 : 0] p1;
-reg	[MSize_19-1 : 0] r;
-reg	[MSize_19-1 : 0] s;
-reg	[MSize_19-1 : 0] Md;
 
-always_ff @( posedge clk or posedge !reset)
-begin 
-	if(!reset)//reset 
+reg[memSize:0][SIZE_ADC_DATA:0] memory;
+
+reg[20:0] dk;
+reg[20:0] dl;
+reg[20:0] p0MultM1;
+reg[20:0] delay1;
+reg[20:0] delay2;
+reg[20:0] delay3;
+reg[20:0] dlMultK;
+reg[20:0] pMultM2;
+reg[20:0] pMultM1;
+reg[20:0] q;
+reg[20:0] p;
+reg[20:0] s;
+
+always@(posedge clk or negedge reset)
+begin
+	if(!reset)
 	begin
-		for(int i=0; i<N_19 ; i++)
-		begin
-				data[i] <= 0;
-		end
-		d<=0;	d1<=0;	d2<=0;	p<=0;	p1<=0;	r<=0;	s<=0;	Md<=0;	output_data <= 0;
+		for(int i = 0; i < memSize; i++)
+			memory[i] <= 0;
+		
+		dk <= 0;
+		dl <= 0;
+		q <= 0;
+		//q[1] <= 0;
+		p <= 0;
+		//p[1] <= 0;
+		s <= 0;
+		//s[1] <= 0;
+		output_data <= 0;
 	end
-	
-	else//calc
+	else
 	begin
-		data[0] <= input_data;	
-		for(int i=1; i<N_19; i++)
-			begin
-			data[i] <= data[i-1];
-			end
-			d1<=data[0]-data[k_19];
-		d2<=data[l_19]-data[k_19 + l_19];
-		d<=d1-d2; 
-		p<=p+d;
-	    Md<=M_19*d;
-	    p1<=p;
-		r<=p1+Md;
-		s<=s+r;
-		output_data<=s[MSize_19-1:4];
-	end 					
+		for(int i = 1; i < memSize; i++)
+			memory[i + 1] <= memory[i];
+		memory[0] <= input_data;
+		
+		dk <= memory[0] - memory[memSize];
+		dl <= memory[L] - memory[L - 1];
+		
+		dlMultK <= dl * K;
+		p = p + dk - dlMultK;
+		pMultM2 <= M2 * p;
+		q = q + pMultM2;
+		pMultM1 <= p * M1;
+		s = s + q + pMultM1;
+		delay1 <= s;
+		delay2 <= delay1;
+		delay3 <= delay2;
+		output_data <= delay3>>>4;
+		
+	end
 end
-endmodule 	
-	
-	
+endmodule
