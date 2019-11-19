@@ -1,4 +1,4 @@
-package v20_Filter_param;
+package v20_filter_param;
 
 parameter k = 10;
 parameter l = 6;

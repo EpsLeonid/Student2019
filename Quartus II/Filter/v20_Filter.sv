@@ -1,6 +1,6 @@
-module v20_Filter(clk,reset,input_data,output_data);
+module v20_filter(clk,reset,input_data,output_data);
 
-import v20_Filter_param::*;
+import v20_filter_param::*;
 
 /*
 parameter k = 10;
