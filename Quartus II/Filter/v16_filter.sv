@@ -16,6 +16,8 @@ input reset,//массив 0 сбрасывает всё
 //выходные данные
 output [SIZE_FILTER_DATA:0] output_data
 );
+import package_settings::*;
+import v16_parameters::*;
 //регистры для хранения выходных аргументов 
 reg[saveDataSize:0][SIZE_ADC_DATA:0] save_data;
 
