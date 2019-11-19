@@ -116,7 +116,7 @@ module filter (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v6));
+		.output_data                                          (output_data_v6));*/
 
 	v7_filter FilterV7 (
 		.clk                                                  (clk),
@@ -124,7 +124,7 @@ module filter (
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v7));
 
-	v8_filter FilterV8 (
+	/*v8_filter FilterV8 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
