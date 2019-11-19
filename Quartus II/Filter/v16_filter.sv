@@ -5,9 +5,6 @@
 //	q(n)=q(n-1)+m2*p(n)
 //	s(n)=s(n-1)+q(n)+m1*p(n)
 
-import package_settings::*;
-import v16_parameters::*;
-
 module v16_filter
 (
 input [SIZE_ADC_DATA:0] input_data,
