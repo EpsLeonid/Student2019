@@ -37,12 +37,13 @@ import v21_filter_parameters::*;
 		else
 		begin
 		data[0] <= input_data;
-		for (integer i = 1; i<=numSliceData ; i++)
+		for (int i=1;i<v21_array;i++)
 			begin
 				data[i] <= data[i-1];
-			end
-
-		d<=data[0]-data[v21_l-1]-data[v21_k-1]+data[v21_k+v21_l-1];
+			end		
+		d_1 <= data[0] - data[v21_k-1];
+		d_2<= data[v21_l-1] - data[v21_k+v21_l-1];
+		d <= d_1 - d_2; 
 		p  <= p + d;
 		mult  <= v21_M*d;
 	    p_1 <= p;
@@ -51,4 +52,4 @@ import v21_filter_parameters::*;
 		output_data <= s >>> 4; 
 		end  
 	end 
-endmodule 
+endmodule
