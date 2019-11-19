@@ -61,6 +61,10 @@ set_global_assignment -name SIMULATION_MODE "TIMING USING FAST TIMING MODEL"
 
 
 
+set_global_assignment -name SYSTEMVERILOG_FILE v17_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v17_filter_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v8_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v8_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v7_filter_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v7_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v16_filter.sv

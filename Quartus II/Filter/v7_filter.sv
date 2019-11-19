@@ -2,9 +2,8 @@
 
 //Input parameters
 import package_settings::*; //SIZE_ADC_DATA = 14, SIZE_FILTER_DATA = 16
-import v7_filter_parameters::k;
-import v7_filter_parameters::l;
-import v7_filter_parameters::M; //k = 10, l = 5, M = 16
+import v7_filter_parameters::*;
+
 
 module v7_filter(
 	
