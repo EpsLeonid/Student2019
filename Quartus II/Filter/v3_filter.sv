@@ -9,7 +9,7 @@
 //s(n)=s(n-1)+q(n)+m1p(n), n>=0
 //M = m1/m2
 
-module v13_filter(
+module v3_filter(
 //Входные параметры:
 input wire clk,
 input wire reset,
@@ -22,10 +22,10 @@ output reg  [SIZE_FILTER_DATA : 0]	output_data
 
 //Параметры cusp-like фильтра
 import package_settings::*;
-import v13_parameters::*;
+import v3_parameters::*;
 
 //регистры хранения данных
-reg[k_13:0][SIZE_ADC_DATA:0] Save_Data;
+reg[k_3:0][SIZE_ADC_DATA:0] Save_Data;
 reg[SIZE:0] dl;
 reg[SIZE:0] dk;
 reg[SIZE:0] q;
@@ -45,7 +45,7 @@ begin
 	
 	begin
 //Задание первых элементов массивов
-		for (int i = 1; i <= k_13; i++)	
+		for (int i = 1; i <= k_3; i++)	
 			begin		
 			Save_Data[i] <= 0;
 			end
@@ -65,22 +65,22 @@ begin
 	else
 	begin
 		
-	for(int i=1;i<k_13; i++)
+	for(int i=1;i<k_3; i++)
 		begin
 			Save_Data[i+1]<=Save_Data[i];
 		end
 		
 		Save_Data[0]<=input_data;
 		
-		dk<=Save_Data[0]-Save_Data[k_13];
-		dl<=Save_Data[l_13]- Save_Data[l_13+1];
+		dk<=Save_Data[0]-Save_Data[k_3];
+		dl<=Save_Data[l_3]- Save_Data[l_3+1];
 			
-		dl_k<=dl*k_13;
+		dl_k<=dl*k_3;
 		p=p[1]+dk-dl_k;
 		p_1<=p;
-		p_m2<=m2_13*p_1;
+		p_m2<=m2_3*p_1;
 		q<=q[1]+p_m2;
-		p_m1<=p_1*m1_13;
+		p_m1<=p_1*m1_3;
 		s<=s[1]+q+p_m1;
 		s1<=s; //задержка
 		output_data<=s1>>>4;

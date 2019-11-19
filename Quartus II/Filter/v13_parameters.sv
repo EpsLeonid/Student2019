@@ -1,6 +1,7 @@
 //парамерзация модуля
 //задание параметров фильтра
 
+
 package v13_parameters;
 
 	parameter l_13 = 5;
@@ -9,5 +10,6 @@ package v13_parameters;
 	parameter m1_13 = 16;
 	parameter m2_13 = 1;
 	parameter SIZE = 20;
+	
 	
 endpackage
