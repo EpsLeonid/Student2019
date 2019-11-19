@@ -1,6 +1,3 @@
-import package_settings::*;
-import v17_filter_parameters::*;
-
 module v17_filter
 (
  input wire clk,
@@ -9,6 +6,9 @@ module v17_filter
 
  output wire [SIZE_FILTER_DATA-1 : 0] output_data
 );
+
+import package_settings::*;
+import v17_filter_parameters::*;
 
 //параметры
 reg	[SizE-1 : 0] data [N_17-1:0];
