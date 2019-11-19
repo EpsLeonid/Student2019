@@ -1,6 +1,3 @@
-import package_settings::*;
-import v19_parameters::*;
-
 module v19_filter
 (
 input [SIZE_ADC_DATA:0] input_data,
@@ -8,6 +5,9 @@ input clk,
 input reset,
 output [SIZE_FILTER_DATA:0] output_data
 );
+
+import package_settings::*;
+import v19_parameters::*;
 
 reg[memSize:0][SIZE_ADC_DATA:0] memory;
 
