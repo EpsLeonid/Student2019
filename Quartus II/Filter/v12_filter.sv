@@ -1,5 +1,4 @@
-import package_settings::*;
-import v12_filter_parameters::*;
+
 
 module v12_filter
 (
@@ -9,7 +8,8 @@ module v12_filter
   input  [SIZE_ADC_DATA-1:0]    input_data,
 // Выходные данные
   output [SIZE_FILTER_DATA-1:0] output_data);
-
+import package_settings::*;
+import v12_filter_parameters::*;
 // регистры памяти
   bit  [size:0]  data [N_11 :0];
   bit  [size:0]  d;

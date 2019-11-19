@@ -5,9 +5,6 @@
 //	q(n)=q(n-1)+m2*p(n)
 //	s(n)=s(n-1)+q(n)+m1*p(n)
 
-import package_settings::*;
-import v16_parameters::*;
-
 module v16_filter
 (
 input [SIZE_ADC_DATA:0] input_data,
@@ -16,6 +13,8 @@ input reset,//массив 0 сбрасывает всё
 //выходные данные
 output [SIZE_FILTER_DATA:0] output_data
 );
+import package_settings::*;
+import v16_parameters::*;
 //регистры для хранения выходных аргументов 
 reg[saveDataSize:0][SIZE_ADC_DATA:0] save_data;
 
