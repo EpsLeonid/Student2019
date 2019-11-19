@@ -197,13 +197,13 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v19));
-/*
+
 	v20_filter FilterV20 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v20));
-*/		
+		
 	v21_filter FilterV21 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
