@@ -35,7 +35,7 @@ module v15_filter(
 		end
 		else begin
 			data[0] <= input_data;
-			for (integer i=1;i<v15_bufferSize;i++)
+			for (integer i=v15_bufferSize-1;i>0;i--)
 				begin
 					data[i]<=data[i-1];
 				end

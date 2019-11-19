@@ -21,7 +21,9 @@ reg[saveDataSize:0][SIZE_ADC_DATA:0] save_data;
 reg[20:0] dk;
 reg[20:0] dl;
 reg[20:0] q;
+reg[20:0] q_1;
 reg[20:0] p;
+reg[20:0] p_1;
 reg[20:0] s;
 reg[20:0] dl_k;
 reg[20:0] p_m2;
@@ -36,19 +38,27 @@ begin
 	if(!reset)
 	begin
 		for(int i=0;i<saveDataSize;i++)
-			save_data[i]<= 0;
+			begin
+				save_data[i]<= 0;
+			end
 		
 		dk<=0;
 		dl<=0;
 		q<=0;
 		p<=0;
 		s<=0;
+		p_m2<=0;
+		p_m1<=0;
+		p_1<=0;
+		q_1<=0;
 		output_data<=0;
 	end
 	else
 	begin
 		for(int i=1;i<saveDataSize; i++)
-		save_data[i+1]<=save_data[i];
+		begin
+			save_data[i+1]<=save_data[i];
+		end
 		save_data[0]<=input_data;
 		
 		dk<=save_data[0]-save_data[saveDataSize];
@@ -56,16 +66,16 @@ begin
 													//запись происходила в новую ячейку памяти		
 		dl_k<=dl*k_16;
 		p=p+dk-dl_k;
-		p_m2<=m2_16*p;
-		q=q+p_m2;
-		p_m1<=p*m1_16;
-		s=s+q+p_m1;
+		p_1<=p;
+		p_m2<=m2_16*p_1;
+		q<=q+p_m2;
+		//q<=q_1;
+		p_m1<=p_1*m1_16;
+		s<=s+q+p_m1;
 		//задержка на 3 такта, что бы в общем проекте все сигналы приходили в одно время
 		offset1<=s;
-		offset2<=offset1;
-		offset3<=offset2;
-		output_data<=offset3>>>4;
-		offset3>>>4;
+		//offset2<=offset1;
+		output_data<=offset1>>>4;
 		end
 end
 endmodule
