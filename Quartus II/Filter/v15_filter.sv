@@ -9,11 +9,11 @@ module v15_filter(
 	import v15_filter_parameters::*;
 
 	reg [v15_dataSize-1:0]d;
-	reg [v15_dataSize-1:0]dl;
-	reg [v15_dataSize-1:0]dk;
-	reg [v15_dataSize-1:0]p[1:0];
+	reg [v15_dataSize-1:0]dlk;
+	reg [v15_dataSize-1:0]p;
 	reg [v15_dataSize-1:0]r;
-	reg [v15_dataSize-1:0]s[1:0];
+	reg [v15_dataSize-1:0]s;
+	reg [v15_dataSize-1:0]mult;
 	reg [SIZE_ADC_DATA-1:0]data[v15_bufferSize-1:0];
 	always @(posedge clk) begin
 		if(!reset) begin
@@ -21,28 +21,27 @@ module v15_filter(
 				begin
 					data[i] <= 0;
 				end
-
-			p[1] <= 0;
-			p[0] <=0;
-			s[1] <= 0;
-			s[0] <= 0;
+			p <=0;
+			s <= 0;
+			d <=0;
+			r<=0;
+			dlk <=0;
+			mult<=0;
 			output_data <=0;
 		end
 		else begin
-			data[0]<=input_data;
-			for (int i=1;i<v15_bufferSize;i++)
+			for (int i=v15_bufferSize-1;i>0;i--)
 				begin
 					data[i]<=data[i-1];
 				end
-			s[1]<=s[0];
-			p[1]<=p[0];
-			dl<=data[0]-data[v15_l-1];
-			dk<=dl-data[v15_k-1];
-			d<=dk+data[v15_k+v15_l-1];
-			p[0]<=p[1]+d;
-			r<=v15_M*d+p[0];
-			s[0]<=s[1]+r;
-			output_data	<=s[0]>>4;
+			data[0]<=input_data;
+			dlk<=data[0]-data[v15_l]-data[v15_k];
+			d<=dlk+data[v15_k+v15_l];
+			p<=p+d;
+			mult<=v15_M*d;
+			r<=mult+p;
+			s<=s+r;
+			output_data	<=s>>>4;
 		end
 	end
 endmodule
