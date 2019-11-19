@@ -80,9 +80,10 @@ begin
 		p_1<=p;
 		p_m2<=m2_3*p_1;
 		q<=q[1]+p_m2;
+		q_1<=q;
 		p_m1<=p_1*m1_3;
-		s<=s[1]+q+p_m1;
-		s1<=s; //çàäåğæêà
+		s<=s[1]+q_1+p_m1;
+		s1<=s; 
 		output_data<=s1>>>4;
 		end
 end
