@@ -20,6 +20,9 @@ reg[20:0] s;
 reg[20:0] dl_k;
 reg[20:0] p_m2;
 reg[20:0] p_m1;
+reg[20:0] p_m2_1;
+reg[20:0] p_m2_2;
+reg[20:0] p_m2_3;
 reg[20:0] offset1;
 reg[20:0] offset2;
 reg[20:0] offset3;
@@ -57,11 +60,17 @@ begin
 		dl_k<=dl*k_6;
 		p=p[1]+dk-dl_k;
 		p_1<=p;
+		
 		p_m2<=m2_6*p_1;
-		q<=q[1]+p_m2;
+		p_m2_1<=p_m2;
+		p_m2_2<=p_m2_1;
+		p_m2_3<=p_m2_2;
+		
+		q<=q[1]+p_m2_3;
+		q<=q_1;
 		
 		p_m1<=p_1*m1_6;
-		s<=s[1]+q+p_m1;
+		s<=s[1]+q_1+p_m1;
 		
 		offset1<=s;
 		output_data<=offset1>>>4;
