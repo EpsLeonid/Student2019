@@ -27,7 +27,7 @@ module v21_filter(
 			data[0]<=input_data;
 			s[1]<=s[0];
 			p[1]<=p[0];
-			d<=data[0]-data[v21_l-1]-data[v21_k-1]-data[v21_k+v21_l-1];
+			d<=data[0]-data[v21_l-1]-data[v21_k-1]+data[v21_k+v21_l-1];
 			p[0]<=p[1]+d;
 			r<=v21_M*d+p[0];
 			s[0]<=s[1]+r;

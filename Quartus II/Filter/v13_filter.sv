@@ -66,12 +66,12 @@ always @ (posedge clk or negedge reset) begin
 			q[1] <= q[0];
 			
 			
-			dk <= data [0] - data[k-1];
+			dk <= data [0] - data[k_13-1];
 			dl[0] <= data [0] - data [1];
 			
 			
 			
-			p[0] <= p[1]+ dk - k*dl[l_13-1];
+			p[0] <= p[1]+ dk - k_13*dl[l_13-1];
 			q[0]= q[1]+m2_13*p[0];
 			s[0]= s[1] +q[0]+m1_13*p[0];
 			s2[0] <=s[0];
