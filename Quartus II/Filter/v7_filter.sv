@@ -48,14 +48,14 @@ always @(posedge clk or posedge !reset) begin
 			DATA[i] <= DATA[i-1];
 		end
 		DATA_ADDIT_1 <= DATA[0] - DATA[k_7];
-		DATA_ADDIT_2 <= DATA[l_7] - DATA[k_11+l_7];
+		DATA_ADDIT_2 <= DATA[l_7] - DATA[k_7+l_7];
 		DATA_d <= DATA_ADDIT_1 - DATA_ADDIT_2;
 		DATA_p <= DATA_p + DATA_d;
 		DATA_s_ADDIT <= M_7 * DATA_d;
 		DATA_p_ADDIT <= DATA_p;
 		DATA_r <= DATA_p_ADDIT + DATA_s_ADDIT;
 		DATA_s <= DATA_s + DATA_r;
-		output_data <= DATA_s[19:4];
+		output_data <= DATA_s >>> 4;
 	end
 	end
 endmodule
