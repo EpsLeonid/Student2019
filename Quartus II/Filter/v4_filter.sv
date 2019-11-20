@@ -1,9 +1,3 @@
-import package_settings::SIZE_ADC_DATA;
-import package_settings::SIZE_FILTER_DATA;
-import v4_parameters::K;
-import v4_parameters::L;
-import v4_parameters::M;
-
 module v4_filter
 ( 
 input wire clk,
@@ -11,15 +5,21 @@ input wire reset,
 input wire signed [SIZE_ADC_DATA-1:0] input_data,
 output reg signed [SIZE_FILTER_DATA-1:0] output_data
 );
+import package_settings::SIZE_ADC_DATA;
+import package_settings::SIZE_FILTER_DATA;
+import v4_parameters::K;
+import v4_parameters::L;
+import v4_parameters::M;
+
 reg [SIZE_ADC_DATA+6:0] P;
 reg [SIZE_ADC_DATA+6:0] Md;
 reg [SIZE_ADC_DATA+6:0] S;
 reg [SIZE_ADC_DATA+6:0] R;
 reg [SIZE_ADC_DATA+6:0] V [K+L:0];
 reg [SIZE_ADC_DATA+6:0] D;
-reg	[SIZE_ADC_DATA+6 : 0] D1;
-reg	[SIZE_ADC_DATA+6 : 0] D2;
-reg	[SIZE_ADC_DATA+6 : 0] P1;
+reg	[SIZE_ADC_DATA+6:0] D1;
+reg	[SIZE_ADC_DATA+6:0] D2;
+reg	[SIZE_ADC_DATA+6:0] P1;
 
 always @( posedge clk or posedge !reset)
 begin 
@@ -27,7 +27,7 @@ begin
 begin
 		for(int I=0; I <= K+L ; I++)
 		begin
-				V[I] <= 0;
+			V[I] <= 0;
 		end
 		D <= 0;	
 		D1 <= 0;	
