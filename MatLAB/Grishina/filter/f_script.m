@@ -30,4 +30,4 @@ grid on;
 figure;
 plot(t,z2);
 grid on;
-
+z2[0];
