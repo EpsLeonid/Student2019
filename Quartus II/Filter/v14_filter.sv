@@ -55,8 +55,8 @@ always @ (posedge clk or negedge reset)
 		d2 <= d - d1; 
 		p <= p + d2;
 		Md_14 <= M_14 * d2;
-	    p_1 <= p;
-		r <= p_1 + Md_14;
+	    p1 <= p;
+		r <= p1 + Md_14;
 		s <= s + r;
 		output_data <= s >>> 4; 
 		end  
