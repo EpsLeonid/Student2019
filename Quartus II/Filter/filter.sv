@@ -123,12 +123,12 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v7));
-/*
+
 	v8_filter FilterV8 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
-		.output_data                                          (output_data_v8));*/
+		.output_data                                          (output_data_v8));
 
 	v9_filter FilterV9 (
 		.clk                                                  (clk),
