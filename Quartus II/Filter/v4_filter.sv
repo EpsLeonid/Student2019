@@ -8,8 +8,8 @@ module v4_filter
 ( 
 input wire clk,
 input wire reset,
-input wire signed [SIZE_ADC_DATA-1:0] input_bus,
-output reg signed [SIZE_FILTER_DATA-1:0] output_bus
+input wire signed [SIZE_ADC_DATA-1:0] input_data,
+output reg signed [SIZE_FILTER_DATA-1:0] output_data
 );
 reg [SIZE_ADC_DATA+6:0] P;
 reg [SIZE_ADC_DATA+6:0] Md;
@@ -44,9 +44,9 @@ begin
 begin
 		V[0] <= input_data;	
 		for(int I=1; I <= K+L; I++)
-				V[i] <= V[V-L];
-		D1 <= v[0] - V[K];
-		D2 <= v[L] - V[K+L];
+				V[I] <= V[V-L];
+		D1 <= V[0] - V[K];
+		D2 <= V[L] - V[K+L];
 		D <= D1 - D2; 
 		P <= P + D;
 	    Md <= M * D;
