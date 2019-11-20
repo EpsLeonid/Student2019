@@ -44,7 +44,7 @@ begin
 begin
 		V[0] <= input_data;	
 		for(int I=1; I <= K+L; I++)
-				V[I] <= V[V-L];
+			V[I] <= V[I-L];
 		D1 <= V[0] - V[K];
 		D2 <= V[L] - V[K+L];
 		D <= D1 - D2; 
