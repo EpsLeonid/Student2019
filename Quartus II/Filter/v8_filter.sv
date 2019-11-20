@@ -31,7 +31,7 @@ always @( posedge clk or posedge !reset)
 begin 
 	if(!reset)
 	begin
-		for(int i=0; i < k+l ; i++)
+		for(int i=0; i <= k+l ; i++)
 		begin
 				v[i] <= 0;
 		end
@@ -49,7 +49,7 @@ begin
 	else
 	begin
 		v[0] <= input_data;	
-		for(int i=1; i < k+l; i++)
+		for(int i=1; i <= k+l; i++)
 				v[i] <= v[i-1];
 		d1 <= v[0] - v[k];
 		d2 <= v[l] - v[k+l];
