@@ -7,26 +7,53 @@ import v4_parameters::M;
 module v4_filter
 ( 
 input wire clk,
+input wire reset,
 input wire signed [SIZE_ADC_DATA-1:0] input_bus,
 output reg signed [SIZE_FILTER_DATA-1:0] output_bus
 );
-reg signed [SIZE_ADC_DATA+2:0] P;
-reg signed [SIZE_ADC_DATA+5:0] Md;
-reg signed [SIZE_ADC_DATA+7:0] S;
-reg signed [SIZE_ADC_DATA+6:0] R;
-reg signed [SIZE_ADC_DATA-1:0] V [K+L:0];
-reg signed [SIZE_ADC_DATA+1:0] D;
- 
-always @(negedge clk)
- begin
- V[0] <= input_bus;
- for(integer I = 1; i<=(K+L) ; i++)
-   V[i] <= V[I-1];
-D <= V[0] - V[K] - V[L] + V[K+L];
-P <= P + D;
-Md <= M*D;
-R <= P + Md;
-S <= S + R;
-output_bus <= S >>> 4;
+reg [SIZE_ADC_DATA+6:0] P;
+reg [SIZE_ADC_DATA+6:0] Md;
+reg [SIZE_ADC_DATA+6:0] S;
+reg [SIZE_ADC_DATA+6:0] R;
+reg [SIZE_ADC_DATA+6:0] V [K+L:0];
+reg [SIZE_ADC_DATA+6:0] D;
+reg	[SIZE_ADC_DATA+6 : 0] D1;
+reg	[SIZE_ADC_DATA+6 : 0] D2;
+reg	[SIZE_ADC_DATA+6 : 0] P1;
+
+always @( posedge clk or posedge !reset)
+begin 
+	if(!reset)
+begin
+		for(int I=0; I <= K+L ; I++)
+		begin
+				V[I] <= 0;
+		end
+		D <= 0;	
+		D1 <= 0;	
+		D2 <= 0;	
+		P <= 0;	
+		P1 <= 0;	
+		R <= 0;	
+		S <= 0;	
+		Md <= 0;	
+		output_data <= 0;
+		end
+	
+	else
+begin
+		V[0] <= input_data;	
+		for(int I=1; I <= K+L; I++)
+				V[i] <= V[V-L];
+		D1 <= v[0] - V[K];
+		D2 <= v[L] - V[K+L];
+		D <= D1 - D2; 
+		P <= P + D;
+	    Md <= M * D;
+	    P1 <= P;
+		R <= P1 + Md;
+		S <= S + R;
+		output_data <= S >>> 4;
+	end 					
 end
 endmodule
