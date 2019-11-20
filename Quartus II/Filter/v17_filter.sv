@@ -50,14 +50,14 @@ begin
 			end 
 //вывод 
 	 	d1 <= data[0] - data[k_17];
-		d2<= data[l_17] - data[k_11 + l_17];
+		d2<= data[l_17] - data[k_17 + l_17];
 		d <= d1 - d2; 
 		p  <= p + d;
 	    Md  <= M_17*d;
 	    p1 <= p;
 		r <= p1 + Md;
 		s <= s + r;
-		output_data <= s[19:4];
+		output_data <= s >>> 4 ;
 		end 					
 	end
 endmodule
