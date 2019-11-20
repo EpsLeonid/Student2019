@@ -3,11 +3,7 @@
 // distributed in any way, in any medium, whether in whole or in part, without
 // prior written permission from PAVEL Lanshakov FA-91M.
 
-import package_settings::SIZE_ADC_DATA;
-import package_settings::SIZE_FILTER_DATA;
-import v8_parameters::k;
-import v8_parameters::l;
-import v8_parameters::M;
+
 
 
 module v8_filter
@@ -17,6 +13,13 @@ module v8_filter
 	input wire  	[SIZE_ADC_DATA - 1 : 0]    input_data,
 	output wire		[SIZE_FILTER_DATA-1 : 0]   output_data
 );
+
+import package_settings::SIZE_ADC_DATA;
+import package_settings::SIZE_FILTER_DATA;
+import v8_parameters::k;
+import v8_parameters::l;
+import v8_parameters::M;
+
 reg	[SIZE_ADC_DATA+6 : 0] v [k+l:0];
 reg	[SIZE_ADC_DATA+6 : 0] d;
 reg	[SIZE_ADC_DATA+6 : 0] d1;
