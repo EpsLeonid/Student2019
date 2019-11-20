@@ -11,7 +11,7 @@ import package_settings::*;
 import v17_filter_parameters::*;
 
 //параметры
-reg	[SizE : 0] data [N_17:0];
+reg	[SizE : 0] data [N_17+1:0];
 reg	[SizE : 0] d;
 reg	[SizE : 0] d1;
 reg	[SizE : 0 ] d2;
@@ -34,7 +34,7 @@ begin
 			r  <= 0;
 			s  <= 0;
 			Md <= 0;
-		for(int i=0; i<N_17; i++)
+		for(int i=0; i<N_17+1; i++)
 		   begin
 			data[i] <= 0;
 		   end
@@ -44,7 +44,7 @@ begin
 	else
 	begin
 	data[0] <= input_data;	
-		for(int i=1; i<N_17 ; i++)
+		for(int i=1; i<N_17+1 ; i++)
 			begin
 			data[i] <= data[i-1];
 			end 

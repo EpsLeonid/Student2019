@@ -16,7 +16,7 @@ output wire [SIZE_FILTER_DATA-1:0] output_data
 );
 
 //Registers
-reg [S_7:0] DATA [N_7:0];
+reg [S_7:0] DATA [N_7+1:0];
 reg [S_7:0] DATA_ADDIT_1;
 reg [S_7:0] DATA_ADDIT_2;
 reg [S_7:0] DATA_d;
@@ -38,13 +38,13 @@ always @(posedge clk or posedge !reset) begin
 		DATA_s <= 0;
 		DATA_s_ADDIT <= 0;
 		output_data <= 0;
-		for (int i = 0; i < N_7; i++)
+		for (int i = 0; i < N_7+1; i++)
 			DATA[i] <= 0;
 	end
 	else
 	begin
 		DATA[0] <= input_data; //Start of filter code
-		for (int i = 1; i < N_7; i++) begin
+		for (int i = 1; i < N_7+1; i++) begin
 			DATA[i] <= DATA[i-1];
 		end
 		DATA_ADDIT_1 <= DATA[0] - DATA[k_7];
