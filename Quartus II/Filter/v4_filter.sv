@@ -21,7 +21,7 @@ reg	[SIZE_ADC_DATA+6:0] D1;
 reg	[SIZE_ADC_DATA+6:0] D2;
 reg	[SIZE_ADC_DATA+6:0] P1;
 
-always @( posedge clk or negedge !reset)
+always @( posedge clk or posedge !reset)
 begin 
 	if(!reset)
 begin
