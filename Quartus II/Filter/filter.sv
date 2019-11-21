@@ -160,14 +160,14 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v13));
-/*
+
 	v14_filter FilterV14 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v14));
 		
-*/
+
 	v15_filter FilterV15 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
