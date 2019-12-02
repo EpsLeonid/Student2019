@@ -63,6 +63,17 @@ set_global_assignment -name SIMULATION_MODE "TIMING USING FAST TIMING MODEL"
 
 set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
 set_global_assignment -name TIMEQUEST_DO_CCPP_REMOVAL ON
+set_global_assignment -name SYSTEMVERILOG_FILE v14_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v8_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v8_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v4_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v4_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v6_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v6_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v16_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v16_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v3_filter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v3_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v18_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v18_filter_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v19_filter.sv
@@ -71,12 +82,8 @@ set_global_assignment -name SYSTEMVERILOG_FILE v20_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v20_filter_param.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v17_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v17_filter_parameters.sv
-set_global_assignment -name SYSTEMVERILOG_FILE v8_parameters.sv
-set_global_assignment -name SYSTEMVERILOG_FILE v8_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v7_filter_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v7_filter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE v16_filter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE v16_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v5_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v5_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v21_filter_parameters.sv
@@ -103,4 +110,5 @@ set_global_assignment -name SYSTEMVERILOG_FILE v13_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v13_parameters.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v15_filter.sv
 set_global_assignment -name SYSTEMVERILOG_FILE v15_filter_parameters.sv
+set_global_assignment -name SYSTEMVERILOG_FILE v14_parameters.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -3,11 +3,7 @@
 // distributed in any way, in any medium, whether in whole or in part, without
 // prior written permission from PAVEL Lanshakov FA-91M.
 
-import package_settings::SIZE_ADC_DATA;
-import package_settings::SIZE_FILTER_DATA;
-import v8_parameters::k;
-import v8_parameters::l;
-import v8_parameters::M;
+
 
 
 module v8_filter
@@ -17,6 +13,13 @@ module v8_filter
 	input wire  	[SIZE_ADC_DATA - 1 : 0]    input_data,
 	output wire		[SIZE_FILTER_DATA-1 : 0]   output_data
 );
+
+import package_settings::SIZE_ADC_DATA;
+import package_settings::SIZE_FILTER_DATA;
+import v8_parameters::k;
+import v8_parameters::l;
+import v8_parameters::M;
+
 reg	[SIZE_ADC_DATA+6 : 0] v [k+l:0];
 reg	[SIZE_ADC_DATA+6 : 0] d;
 reg	[SIZE_ADC_DATA+6 : 0] d1;
@@ -31,7 +34,7 @@ always @( posedge clk or posedge !reset)
 begin 
 	if(!reset)
 	begin
-		for(int i=0; i < k+l ; i++)
+		for(int i=0; i <= k+l ; i++)
 		begin
 				v[i] <= 0;
 		end
@@ -49,7 +52,7 @@ begin
 	else
 	begin
 		v[0] <= input_data;	
-		for(int i=1; i < k+l; i++)
+		for(int i=1; i <= k+l; i++)
 				v[i] <= v[i-1];
 		d1 <= v[0] - v[k];
 		d2 <= v[l] - v[k+l];

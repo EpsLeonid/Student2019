@@ -16,14 +16,15 @@ input wire 						clk;
 input wire  					reset;
 input wire [SIZE_ADC_DATA - 1 : 0] input_data;
 
-reg 		[SIZE_REG-1:0]		v [16:0]; // 16=k+l
-reg 		[SIZE_REG-1:0]		dkl;
-reg 		[SIZE_REG-1:0]		dk2;
-reg 		[SIZE_REG-1:0]		dk3;
-reg 		[SIZE_REG-1:0]		p;
-reg         [SIZE_REG-1:0]      p1;
-reg 		[SIZE_REG-1:0]		r;
-reg 		[SIZE_REG-1:0]		s;
+reg 		[SIZE_REG+6:0]		v [16:0]; // 16=k+l
+reg 		[SIZE_REG+6:0]		dkl;
+reg 		[SIZE_REG+6:0]		dk2;
+reg 		[SIZE_REG+6:0]		dk3;
+reg 		[SIZE_REG+6:0]		p;
+reg         [SIZE_REG+6:0]      p1;
+reg         [SIZE_REG+6:0]      dM;
+reg 		[SIZE_REG+6:0]		r;
+reg 		[SIZE_REG+6:0]		s;
 
 output wire [SIZE_FILTER_DATA-1 : 0] output_data;
 
@@ -32,13 +33,14 @@ begin
 //sozdanie massivov
 	if (!reset)
 	  begin
-	  dkl   <=0;
-      dk2   <=0;
-      dk3   <=0;
-      p 	<=0;
-      p1    <=0;
-      r		<=0;
-      s		<=0;
+	  dkl  <=0;
+      dk2  <=0;
+      dk3  <=0;
+      p    <=0;
+      p1   <=0;
+      dM   <=0;
+      r	   <=0;
+      s	   <=0;
       
     for (integer i = 0; i<=k+l; i++)
 			begin
@@ -54,15 +56,16 @@ begin
 			begin
 				 v[i] <=  v[i-1];
 			end	
-//formuli iz zadania			
+//formuli iz zadania so sdvigom takta			
 
-	  dkl	<= v[0] -v[k];
-	  dk2	<= v[l] - v[k+l];
-	  dk3	<= dkl - dk2;
-	  p <= p + dk3;
-	  p1 <= p;
-      r <= p1 + dk3*M;
-      s <= s + r; 
+	  dkl <= v[0] -v[k];
+	  dk2 <= v[l] - v[k+l];
+	  dk3 <= dkl - dk2;
+	  p   <= p + dk3;
+	  dM  <= dk3*M;
+	  p1  <= p;
+      r   <= p1 + dM;
+      s   <= s + r; 
       output_data <= s >>> 4;
       end
 end

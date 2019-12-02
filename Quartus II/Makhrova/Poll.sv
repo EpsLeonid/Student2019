@@ -17,11 +17,12 @@ input wire [(Const-1):0] C,
 output reg [(2*Const-1):0] DATA_OUT); // выходные данные дл€ задани€ 4
 
 //записываем регистры
-reg [(Const-1):0] reg_C;
+reg [(2*Const-1):0] reg_C;
 // создаЄм регистры дл€ сумматора и умножител€ с шириной, равной ширине выходных шин 
 reg [(2*Const-1):0] DATA_MULT;
-reg [(Const-1):0] DATA_ADD;
-reg [(2*Const-1):0] reg_DATA_OUT;
+reg [(2*Const-1):0] DATA_MULT_2;
+reg [(2*Const-1):0] DATA_ADD;
+
 
 //ф-ци€ дл€ 2-го
 assign  c = a * b; // произведение 
@@ -42,12 +43,16 @@ always_ff @(posedge clk)
 begin
 	DATA_MULT<= A*B;
 end
+// задежка дл€ умножител€
+always_ff @(posedge clk)
+begin
+	DATA_MULT_2<= DATA_MULT;
+end
+
 
 //сумматор	
 always_ff @(posedge clk)
-	reg_DATA_OUT<=DATA_MULT+DATA_ADD;
-	
-always @(posedge clk)
-	DATA_OUT=reg_DATA_OUT;	
+	DATA_OUT<=DATA_MULT_2+DATA_ADD;
+		
 
 endmodule

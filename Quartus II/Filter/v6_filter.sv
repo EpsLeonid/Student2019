@@ -1,21 +1,13 @@
-//	v_16_filter_Kukotenko_Valeria
-//  dk(n)=exp(n)-exp(n-k)
-//	d1(n)=exp(n)-exp(n-1)
-//	p(n)=p(n-1)+dk(n)-k*d1(n-l)
-//	q(n)=q(n-1)+m2*p(n)
-//	s(n)=s(n-1)+q(n)+m1*p(n)
-
-module v16_filter
+module v6_filter
 (
 input [SIZE_ADC_DATA:0] input_data,
 input clk,
-input reset,//массив 0 сбрасывает всё
-//выходные данные
+input reset,
 output [SIZE_FILTER_DATA:0] output_data
 );
 import package_settings::*;
-import v16_parameters::*;
-//регистры для хранения выходных аргументов 
+import v6_parameters::*;
+
 reg[saveDataSize:0][SIZE_ADC_DATA:0] save_data;
 
 reg[20:0] dk;
@@ -34,8 +26,7 @@ reg[20:0] p_m2_3;
 reg[20:0] offset1;
 reg[20:0] offset2;
 reg[20:0] offset3;
-//когда приходит положительный фронт, тогда в новую ячейку
-//памяти(регистр) записываются данные в какой-то момент времени
+
 always@(posedge clk or negedge reset)
 begin
 	if(!reset)
@@ -54,9 +45,6 @@ begin
 		p_m1<=0;
 		p_1<=0;
 		q_1<=0;
-		p_m2_1<=0;
-		p_m2_2<=0;
-		p_m2_3<=0;
 		output_data<=0;
 	end
 	else
@@ -67,14 +55,13 @@ begin
 		end
 		save_data[0]<=input_data;
 		
-		dk<=save_data[0]-save_data[k_16];
-		dl<=save_data[l_16]- save_data[l_16+1];//смещение на 1, что бы при каждом новом обращении
-													//запись происходила в новую ячейку памяти		
-		dl_k<=dl*k_16;
+		dk<=save_data[0]-save_data[k_6];
+		dl<=save_data[l_6]- save_data[l_6+1];		
+		dl_k<=dl*k_6;
 		p=p[1]+dk-dl_k;
 		p_1<=p;
 		
-		p_m2<=m2_16*p_1;
+		p_m2<=m2_6*p_1;
 		p_m2_1<=p_m2;
 		p_m2_2<=p_m2_1;
 		p_m2_3<=p_m2_2;
@@ -82,11 +69,10 @@ begin
 		q<=q[1]+p_m2_3;
 		q<=q_1;
 		
-		p_m1<=p_1*m1_16;
+		p_m1<=p_1*m1_6;
 		s<=s[1]+q_1+p_m1;
-		//задержка на 3 такта, что бы в общем проекте все сигналы приходили в одно время
+		
 		offset1<=s;
-		//offset2<=offset1;
 		output_data<=offset1>>>4;
 		end
 end

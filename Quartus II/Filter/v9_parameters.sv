@@ -1,7 +1,9 @@
 package v9_parameters;
-parameter L = 6;
-parameter K = 13;
-parameter M1 = 15;
-parameter M2 = 1;
-parameter memSize1 = 13;
+	parameter l_9 = 6;
+	parameter k_9 = 13;
+	parameter N_9 = 13;
+	parameter m1_9 = 15;
+	parameter m2_9 = 1;
+	parameter SIZE9 = 20;
+	
 endpackage
