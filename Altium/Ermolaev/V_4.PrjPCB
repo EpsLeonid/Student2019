@@ -32,22 +32,6 @@ DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 
 [Document1]
-DocumentPath=V_4.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-
-[Document2]
 DocumentPath=V_4.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -63,8 +47,24 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 
+[Document2]
+DocumentPath=V_4.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+
 [Document3]
-DocumentPath=..\..\..\..\Sapr\Ermola\V_4\V_4.PcbLib
+DocumentPath=V_4.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -80,7 +80,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 
 [Document4]
-DocumentPath=..\..\..\..\Sapr\Ermola\V_4\V_4.SchLib
+DocumentPath=V_4.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
