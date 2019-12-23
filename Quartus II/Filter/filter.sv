@@ -98,7 +98,7 @@ module filter (
 		.reset                                                (reset),
 		.input_data                                           (output_data_exp_sig_gen),
 		.output_data                                          (output_data_v3));
-
+/*
 	v4_filter FilterV4 (
 		.clk                                                  (clk),
 		.reset                                                (reset),
